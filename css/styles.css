@@ -1,0 +1,182 @@
+/* Estilo global para el cuerpo y html */
+body, html {
+    margin: 0; /* Sin margen */
+    padding: 0; /* Sin relleno */
+    height: 100%; /* Altura completa */
+}
+
+/* Estilo para el header */
+header {
+    background-color: #0074d9; /* Color de fondo azul */
+    display: flex; /* Usa flexbox para el layout */
+    align-items: center; /* Alinea elementos verticalmente en el centro */
+    padding: 5px; /* Añade un relleno de 5px */
+}
+
+/* Alineación del contenido del div con id "controls" a la derecha */
+#controls {
+    text-align: right; /* Alinea el texto y elementos inline a la derecha */
+}
+
+/* Estilo para el contenedor de controles */
+.controls-style {
+    background-color: #0074d9; /* Mismo color azul del header */
+    border: 0px solid #0074d9; /* Borde más delgado y del mismo color */
+    padding: 2px; /* Relleno */
+    border-radius: 0px; /* Bordes redondeados */
+    box-shadow: 0 0px 8px rgba(0, 0, 0, 0.1); /* Sombra */
+    margin: 0px 0; /* Margen */
+    display: flex; /* Flexbox para alineación */
+    color: white; /* Color del texto */
+}
+
+/* Estilo para botones con animación de borde */
+.btn-border-animate {
+    background-color: white; /* Fondo blanco */
+    border: 2px solid #015DE1; /* Borde azul */
+    color: #0074d9; /* Texto azul */
+    padding: 2px 10px; /* Relleno */
+    text-align: center; /* Texto centrado */
+    text-decoration: none; /* Sin subrayado */
+    display: inline-block; /* Se muestra como un bloque en línea */
+    font-size: 16px; /* Tamaño de fuente */
+    margin: 0px 0px; /* Sin margen */
+    border-radius: 6px; /* Bordes redondeados */
+    transition: all 0.3s ease; /* Transición suave para todos los cambios */
+    cursor: pointer; /* Cursor de puntero al pasar sobre el botón */
+}
+
+/* Cambio de color al pasar el cursor sobre el botón */
+.btn-border-animate:hover {
+    background-color: #0074d9; /* Fondo azul */
+    color: white; /* Texto blanco */
+}
+
+/* Estilo para el logo en el header */
+#logo {
+    height: 50px; /* Altura del logo */
+    margin-right: 20px; /* Margen derecho */
+    display: flex; /* Usa flexbox */
+    align-items: center; /* Alinea elementos verticalmente en el centro */
+}
+
+/* Estilo para el título del header */
+header h1 {
+    color: white; /* Texto blanco */
+    text-align: center; /* Texto centrado */
+    flex-grow: 1; /* El elemento crece para ocupar el espacio disponible */
+}
+
+/* Estilo para el mapa, ocupa todo el ancho y altura menos 100px */
+#map {
+    height: calc(100% - 100px); /* Altura calculada para ocupar el espacio menos 100px */
+    width: 100%; /* Ancho completo */
+}
+
+/* Estilo para tooltip sin borde */
+.noBorderTooltip {
+    background: none; /* Sin fondo */
+    border: none; /* Sin borde */
+    box-shadow: none; /* Sin sombra */
+    color: #F9F502; /* Texto amarillo */
+    font-size: 16px; /* Tamaño de fuente */
+}
+
+/* Estilo para imagen en popup */
+.popup-img-dpto {
+    width: 100%; /* Ancho completo */
+    height: auto; /* Altura automática */
+}
+
+/* Estilo para tooltip */
+.tooltip-dpto {
+    background-color: rgba(255, 255, 255, 0.5); /* Fondo blanco semi-transparente */
+}
+
+/* Estilo para el título de la leyenda en Leaflet */
+.leaflet-legend-title {
+    text-align: center; /* Texto centrado */
+    font-weight: bold; /* Texto en negrita */
+    font-size: 18px; /* Tamaño de fuente */
+}
+
+/* Media query para dispositivos con un ancho máximo de 768px */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column; /* Coloca los elementos en una columna */
+        text-align: center; /* Texto centrado */
+    }
+
+    #logo {
+        margin-right: 0; /* Sin margen derecho */
+        margin-bottom: 10px; /* Margen inferior */
+    }
+}
+
+/* Estilo para contenedor de checkbox */
+.checkbox-container {
+    display: flex; /* Usa flexbox */
+    flex-direction: column; /* Dirección de columna */
+    align-items: flex-start; /* Alinea elementos al inicio */
+}
+
+/* Estilo para checkbox animado */
+.animated-checkbox {
+    display: none; /* Oculta el checkbox real */
+}
+
+.animated-checkbox + label {
+    display: inline-block; /* Se muestra como un bloque en línea */
+    position: relative; /* Posicionamiento relativo */
+    padding-left: 35px; /* Relleno izquierdo */
+    cursor: pointer; /* Cursor de puntero */
+    user-select: none; /* Evita la selección del texto */
+    font-size: 14px; /* Tamaño de fuente */
+    color: #333; /* Color del texto */
+    transition: color 0.3s; /* Transición suave del color */
+    margin-bottom: 10px; /* Espacio entre checkboxes */
+}
+
+.animated-checkbox + label:before {
+    content: ""; /* Contenido vacío */
+    display: inline-block; /* Se muestra como un bloque en línea */
+    width: 25px; /* Ancho */
+    height: 25px; /* Altura */
+    position: absolute; /* Posicionamiento absoluto */
+    left: 0; /* Posición izquierda */
+    top: 0; /* Posición superior */
+    border: 2px solid #ddd; /* Borde gris */
+    background: white; /* Fondo blanco */
+    transition: background 0.3s; /* Transición suave del fondo */
+}
+
+.animated-checkbox:checked + label:before {
+    background: #007bff; /* Fondo azul cuando está seleccionado */
+}
+
+.animated-checkbox:checked + label:after {
+    content: ""; /* Contenido vacío */
+    display: inline-block; /* Se muestra como un bloque en línea */
+    width: 5px; /* Ancho */
+    height: 10px; /* Altura */
+    border: solid white; /* Borde blanco */
+    border-width: 0 3px 3px 0; /* Ancho del borde */
+    position: absolute; /* Posicionamiento absoluto */
+    left: 10px; /* Posición izquierda */
+    top: 5px; /* Posición superior */
+    transform: rotate(45deg); /* Rotación */
+    transition: width 0.2s ease 0.1s, height 0.2s ease 0.1s, border-color 0.2s ease 0.1s; /* Transiciones suaves */
+}
+
+.animated-checkbox + label:hover {
+    color: #007bff; /* Color azul al pasar el cursor */
+}
+
+.dist-marker {
+    font-size: 9px;
+    border: 1px solid #777;
+    border-radius: 10px;
+    text-align: center;
+    color: #000;
+    background: #fff;
+}

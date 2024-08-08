@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QPZBFRT20V"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QPZBFRT20V');
+</script>
+
+    <title>GeoPortal</title>
+    <meta charset="utf-8">
+    <link rel="icon" href="images/UIIM.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Scripts de Leaflet y Plugins -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+            integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+            crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+            integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+            crossorigin=""></script>
+
+    <script src="https://unpkg.com/leaflet@latest/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-omnivore@0.3.4/leaflet-omnivore.min.js"></script>
+    <script src="https://unpkg.com/leaflet-gpx/gpx.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.6.0/jszip.min.js"></script>
+    <script src="https://unpkg.com/shpjs/dist/shp.min.js"></script>
+    <script src="plugins/Control.FullScreen.js"></script>
+    <script src="plugins/leaflet.geometryutil.js" type="text/javascript"></script>        
+    <script src="plugins/line_coords.js" type="text/javascript"></script>
+    <script src="plugins/leaflet-distance-marker.js"></script>
+    <script src="plugins/leaflet-measure.js"></script>
+    <script src="plugins/leaflet.markercluster.js"></script>
+    <script src="plugins/L.Control.Locate.js"></script>
+    <script src="plugins/Control.MiniMap.min.js"></script>
+    <script src="plugins/Leaflet.Coordinates-0.1.5.min.js"></script>
+    <script src="plugins/Control.Geocoder.js"></script>
+    <script src="plugins/leaflet-heat.js"></script>
+    <script src="plugins/leaflet-search.js"></script>
+    <script src="https://unpkg.com/leaflet-sidebar-v2/js/leaflet-sidebar.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
+    <script src="plugins/leaflet.legend.js"></script>
+
+    <!-- Estilos de Leaflet y Plugins -->
+    <link rel="stylesheet" href="plugins/leaflet-distance-marker.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@latest/dist/leaflet.css" />
+    <link rel="stylesheet" href="plugins/Control.FullScreen.css" />
+    <link rel="stylesheet" href="plugins/leaflet-measure.css" />
+    <link rel="stylesheet" type="text/css" href="plugins/MarkerCluster.css">
+    <link rel="stylesheet" type="text/css" href="plugins/MarkerCluster.Default.css">
+    <link rel="stylesheet" type="text/css" href="plugins/L.Control.Locate.css">
+    <link rel="stylesheet" type="text/css" href="plugins/Control.MiniMap.min.css">
+    <link rel="stylesheet" type="text/css" href="plugins/Leaflet.Coordinates-0.1.5.css">
+    <link rel="stylesheet" type="text/css" href="plugins/Control.Geocoder.css">
+    <link rel="stylesheet" type="text/css" href="plugins/leaflet-search.min.css">
+    <link rel="stylesheet" href="plugins/leaflet-sidebar.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="plugins/leaflet.legend.css">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+
+</head>
+
+<body>
+    
+    <header>
+        <img src="images/universidad.png" alt="Logo UIIM" id="logo">
+        <h1>Geoportal del Municipio de Ocampo</h1>
+    </header>
+
+<div id="controls" class="controls-style">
+    <input type="file" id="fileInput" class="btn-border-animate" accept=".zip,.kml,.gpx">
+    <button id="clear-button" class="btn-border-animate">Borrar Capa</button>
+</div>
+    <div id="map"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.6.0/jszip.min.js"></script>     
+    <script src="https://unpkg.com/shpjs/dist/shp.min.js"></script>
+
+    <script src="plugins/load_shapefile.js"></script> 
+
+    <!-- Inicio del Sidebar -->
+    <div id="sidebar" class="leaflet-sidebar collapsed">
+        <div class="leaflet-sidebar-tabs">
+            <ul role="tablist">
+                <!-- Pestañas del sidebar -->
+                <li><a href="#home" role="tab" id="homeButton"><i class="fa-solid fa-house-user"></i></a></li>
+                <li><a href="#heatmap" role="tab"><i class="fa-solid fa-fire"></i></a></li>
+                <li><a href="#route" role="tab"><i class="fa-solid fa-route"></i></a></li>
+                <li><a href="#charts" role="tab"><i class="fa-solid fa-chart-simple"></i></a></li>
+                <li><a href="#measure" role="tab"><i class="fa-solid fa-ruler"></i></a></li>
+            </ul>
+        </div>
+
+        <div class="leaflet-sidebar-content">
+            <!-- Contenido de la Pestaña Home -->
+            <div class="leaflet-sidebar-pane" id="home">
+                <h1 class="leaflet-sidebar-header">Inicio</h1>
+                <p></p>
+                <p><a href="#home" role="tab">Bienvenidos al Geoportal de Ocampo</a></p>
+            </div>
+
+            <!-- Contenido de la Pestaña Mapa de Calor -->
+            <div class="leaflet-sidebar-pane" id="heatmap">
+                <h1 class="leaflet-sidebar-header">DIVISIÓN POLÍTICA</h1>
+                <p></p>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="toggleMunicipioDeOcampo" aria-label="Checkbox for following text input" checked class="animated-checkbox">
+                    <label for="toggleMunicipioDeOcampo">Municipio de Ocampo</label>
+                    <input type="checkbox" id="toggleMunicipios" aria-label="Checkbox for following text input" checked class="animated-checkbox">
+                    <label for="toggleMunicipios">Municipios de Michoacán</label>
+                    <input type="checkbox" id="toggleLocalidades" aria-label="Checkbox for following text input" class="animated-checkbox">
+                    <label for="toggleLocalidades">Localidades</label>
+                </div>
+            </div>
+
+            <!-- Contenido de la Pestaña Rutas Óptimas -->
+            <div class="leaflet-sidebar-pane" id="route">
+                <h1 class="leaflet-sidebar-header">HIDROGRAFÍA</h1>
+                <p></p>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="toggleCorrientesDeAgua" aria-label="Checkbox for following text input" class="animated-checkbox">
+                    <label for="toggleCorrientesDeAgua">Corrientes de Agua</label>
+                </div>
+            </div>
+
+            <!-- Contenido de la Pestaña Charts -->
+            <div class="leaflet-sidebar-pane" id="charts">
+                <h1 class="leaflet-sidebar-header">Gestión de riesgos</h1>
+                <p></p>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="toggleZonasAfectadasIncendios" aria-label="Checkbox for following text input" class="animated-checkbox">
+                    <label for="toggleZonasAfectadasIncendios">Zonas afectadas por incendios</label>
+
+                    <input type="checkbox" id="toggleAreasDeforestadas" aria-label="Checkbox for following text input" class="animated-checkbox">
+                    <label for="toggleAreasDeforestadas">Áreas deforestadas</label>
+                    <input type="checkbox" id="toggleRiesgoInundaciones" aria-label="Checkbox for following text input" class="animated-checkbox">
+                    <label for="toggleRiesgoInundaciones">Riesgo por inundaciones</label>
+                    <input type="checkbox" id="toggleCambioUsoSuelo" aria-label="Checkbox for following text input" class="animated-checkbox">
+                    <label for="toggleCambioUsoSuelo">Cambio de uso del suelo</label>
+                    <input type="checkbox" id="toggleZonasDeslaves" aria-label="Checkbox for following text input" class="animated-checkbox">
+                    <label for="toggleZonasDeslaves">Zonas de deslaves</label>
+                </div>
+            </div>
+
+            <!-- Contenido de la Pestaña Medida -->
+            <div class="leaflet-sidebar-pane" id="measure">
+                <h1 class="leaflet-sidebar-header">Medir Distancias y Áreas</h1>
+                <div id="measureControl"></div>
+            </div>
+
+        </div>
+    </div>
+    <!-- Fín del Sidebar -->
+
+    <!-- Scripts de capas GeoJSON -->
+    <script src="layers/geojson/restos_arqueologicos.js"></script>
+    <script src="layers/geojson/localidades_ocampo.js"></script>
+    <script src="layers/geojson/localidades.js"></script>
+    <script src="layers/geojson/municipio_ocampo_epsg.js"></script>
+    <script src="layers/geojson/municipios_colindantes_ocampo.js"></script>
+    <script src="layers/geojson/municipios_poblacion_total.js"></script>
+    <script src="layers/geojson/corrientes_de_agua.js"></script>
+    <script src="layers/geojson/zonas_afectadas_por_incendios.js"></script>
+    <script src="layers/geojson/red_hidrica.js"></script>
+    <script src="layers/geojson/departamentos_poblacion.js"></script>
+
+    <!-- Scripts personalizados -->
+    <script src="js/icons.js"></script>
+    <script src="js/symbologies.js"></script>
+    <script src="js/popups.js"></script>
+    <script src="js/tooltips.js"></script>
+    <script src="js/maps.js"></script>
+</body>
+
+</html>
