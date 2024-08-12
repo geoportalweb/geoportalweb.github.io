@@ -78,14 +78,28 @@ header h1 {
     background: none; /* Sin fondo */
     border: none; /* Sin borde */
     box-shadow: none; /* Sin sombra */
-    color: #F9F502; /* Texto amarillo */
+    color: #FFFF00; /* Texto amarillo */
     font-size: 16px; /* Tamaño de fuente */
+}
+
+/* Estilo para tooltip sin borde */
+.noBorderTooltipNucleos 
+{
+    background: none; /* Sin fondo */
+    border: none; /* Sin borde */
+    box-shadow: none; /* Sin sombra */
+    color: #eafaf1; /* Texto BLANCO */
+    font-size: 10px; /* Tamaño de fuente */    
 }
 
 /* Estilo para imagen en popup */
 .popup-img-dpto {
     width: 100%; /* Ancho completo */
     height: auto; /* Altura automática */
+}
+/*Para quitar las leyendas de Leaflet*/
+.leaflet-control-attribution {
+    display: none;
 }
 
 /* Estilo para tooltip */
@@ -97,7 +111,7 @@ header h1 {
 .leaflet-legend-title {
     text-align: center; /* Texto centrado */
     font-weight: bold; /* Texto en negrita */
-    font-size: 18px; /* Tamaño de fuente */
+    font-size: 16px; /* Tamaño de fuente */
 }
 
 /* Media query para dispositivos con un ancho máximo de 768px */
