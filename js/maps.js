@@ -1,5 +1,6 @@
 // Crear el mapa y establecer la vista inicial
 var map = L.map("map", {
+    
     fullscreenControl: true,
     fullscreenControlOptions: {
         position: 'topright'
@@ -86,6 +87,12 @@ var municipios_pob_tot = L.geoJSON(municipios_poblacion_total, {
     style: cargarStylePob2015, // Estilo personalizado para la capa
     onEachFeature: agregarTooltipMunicipios // Función para añadir tooltips a cada municipio
 }).addTo(map);
+// Crear una capa GeoJSON para nucleos agrarios con estilos personalizados y popups
+var nucleos_pob_tot = L.geoJSON(nucleos_agrarios_con_pob_total, {
+    style: cargarStyleNuc, // Estilo personalizado para la capa
+    onEachFeature: agregarTooltipNucleos // Función para añadir tooltips a cada municipio
+}).addTo(map);
+
 
 //console.log(zonas_afectadas_por_incendios);
 //----------------INICIO MAPA DE CALOR---------------------------------------------------------------
@@ -135,6 +142,18 @@ function actualizarLeyenda() {
             weight: 2, // Grosor del borde
             dashArray: 0, // Patrón de línea
             layers: municipios_pob_tot // Capa asociada a la leyenda
+        });
+    }
+
+    // Añadir la leyenda de nucleos si la capa está visible
+    if (map.hasLayer(nucleos_pob_tot)) {
+        visibleLegends.push({
+            label: "Núcleos A. de Zitácuaro", // Etiqueta de la leyenda
+            type: "rectangle", // Tipo de símbolo de la leyenda
+            color: "#00FF00", // Color del símbolo
+            weight: 2, // Grosor del borde
+            dashArray: 0, // Patrón de línea
+            layers: nucleos_pob_tot // Capa asociada a la leyenda
         });
     }
 
@@ -207,6 +226,8 @@ document.getElementById("toggleMunicipioDeOcampo").addEventListener("change", fu
     actualizarLeyenda();
 });
 
+
+
 // Evento para mostrar/ocultar los municipios colindantes
 document.getElementById("toggleMunicipios").addEventListener("change", function () {
     if (this.checked) {
@@ -216,6 +237,20 @@ document.getElementById("toggleMunicipios").addEventListener("change", function 
     } else {
         if (map.hasLayer(municipios_pob_tot)) {
             map.removeLayer(municipios_pob_tot);
+        }
+    }
+    actualizarLeyenda();
+});
+
+// Evento para mostrar/ocultar los municipios colindantes
+document.getElementById("toggleNucleos").addEventListener("change", function () {
+    if (this.checked) {
+        if (!map.hasLayer(nucleos_pob_tot)) {
+            map.addLayer(nucleos_pob_tot);
+        }
+    } else {
+        if (map.hasLayer(nucleos_pob_tot)) {
+            map.removeLayer(nucleos_pob_tot);
         }
     }
     actualizarLeyenda();
@@ -288,6 +323,16 @@ window.onload = function () {
         }
     }
 
+     if (document.getElementById("toggleNucleos").checked) {
+        if (!map.hasLayer(nucleos_pob_tot)) {
+            map.addLayer(nucleos_pob_tot);
+        }
+    } else {
+        if (map.hasLayer(nucleos_pob_tot)) {
+            map.removeLayer(nucleos_pob_tot);
+        }
+    }
+
     if (document.getElementById("toggleLocalidades").checked) {
         if (!map.hasLayer(localidades)) {
             map.addLayer(localidades);
@@ -353,7 +398,7 @@ L.control.locate({
 // Agregar control de Geocodificación
 L.Control.geocoder({
     position: "topleft", // Posición del control de geocodificación
-    placeholder: "Buscar...", // Texto del marcador de posición del control
+    placeholder: "Buscar dirección...", // Texto del marcador de posición del control
     errorMessage: "No se encontraron resultados de su dirección" // Mensaje de error cuando no se encuentran resultados
 }).addTo(map);
 
@@ -372,7 +417,7 @@ searchControl.on('search:locationfound', function (e) {
     e.layer.setStyle({
         fillColor: '#3f0', // Color de relleno al encontrar la ubicación
         color: '#0f0', // Color del borde al encontrar la ubicación
-        weight: 8 // Grosor del borde al encontrar la ubicación
+        weight: 5 // Grosor del borde al encontrar la ubicación
     });
     if (e.layer._popup) {
         e.layer.openPopup(); // Abrir el popup de la capa si existe
