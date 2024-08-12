@@ -12,17 +12,18 @@ function rasgo_principal_rh_style(feature) {
     switch(feature.properties.CONDICION) {
         case "PERENNE":
             return {
-                color: "#02F9C8",   // Color para ríos perennes
+                color: "#02B6F9",   // Color para ríos intermitentes
                 weight: 1,          // Grosor de la línea
-                opacity: 1,         // Opacidad de la línea
-                dashArray: "10,5 "  // Patrón de guiones de la línea
+                opacity: 1          // Opacidad de la línea
+                
             };
 
         case "INTERMITENTE":
             return {
-                color: "#02B6F9",   // Color para ríos intermitentes
+                color: "#02F9C8",   // Color para ríos perennes
                 weight: 1,          // Grosor de la línea
-                opacity: 1          // Opacidad de la línea
+                opacity: 1,         // Opacidad de la línea
+                dashArray: "10,5 "  // Patrón de guiones de la línea
             };
 
         /* 
@@ -67,17 +68,35 @@ var limite_departamental_style = {
 // Función para obtener colores basados en el valor de población
 function obtenerColorPob2015(NOMGEO) {
     // Aquí podrías definir la lógica para asignar colores según el nombre del municipio
-    return "#ffffd4"; // Ejemplo de color de relleno, ajusta según tus necesidades
+    return "#fef9e7"; // Ejemplo de color de relleno, ajusta según tus necesidades
+}
+
+// Función para obtener colores basados en el valor de población
+function obtenerColorNuc(Name) {
+    // Aquí podrías definir la lógica para asignar colores según el nombre del municipio
+    return "#eafaf1"; // Ejemplo de color de relleno, ajusta según tus necesidades
 }
 
 // Función para cargar el estilo basado en la población de 2015
 function cargarStylePob2015(feature) {
     return {
-        fillColor: obtenerColorPob2015(feature.properties.NOM_MUN), // Color de relleno basado en la población
-        fillOpacity: 0.3,   // Opacidad del relleno
+        fillColor: obtenerColorPob2015(feature.properties.NOMGEO), // Color de relleno basado en la población
+        fillOpacity: 0.2,   // Opacidad del relleno
         weight: 1,          // Grosor del borde
-        color: "yellow",    // Color del borde
-        opacity: 0.5,       // Opacidad del borde
+        color: "#FFFF00",    // Color del borde
+        opacity: 1,       // Opacidad del borde
+        dashArray: ""       // Sin patrón de guiones
+    };
+}
+
+// Función para cargar el estilo basado en los núcleos agrarios
+function cargarStyleNuc(feature) {
+    return {
+        fillColor: obtenerColorNuc(feature.properties.Name), // Color de relleno 
+        fillOpacity: 0.2,   // Opacidad del relleno
+        weight: 1,          // Grosor del borde
+        color: "#00FF00",    // Color del borde
+        opacity: 1,       // Opacidad del borde
         dashArray: ""       // Sin patrón de guiones
     };
 }
