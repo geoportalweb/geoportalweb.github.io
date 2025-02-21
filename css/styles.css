@@ -3,58 +3,72 @@ body, html {
     margin: 0; /* Sin margen */
     padding: 0; /* Sin relleno */
     height: 100%; /* Altura completa */
+    background: none; /* Sin fondo */
 }
 
 /* Estilo para el header */
 header {
-    background-color: #0074d9; /* Color de fondo azul */
+    background-color: #800020; /* Color de fondo del header */
     display: flex; /* Usa flexbox para el layout */
     align-items: center; /* Alinea elementos verticalmente en el centro */
     padding: 5px; /* Añade un relleno de 5px */
-}
-
-/* Alineación del contenido del div con id "controls" a la derecha */
-#controls {
-    text-align: right; /* Alinea el texto y elementos inline a la derecha */
-}
-
-/* Estilo para el contenedor de controles */
-.controls-style {
-    background-color: #0074d9; /* Mismo color azul del header */
-    border: 0px solid #0074d9; /* Borde más delgado y del mismo color */
-    padding: 2px; /* Relleno */
-    border-radius: 0px; /* Bordes redondeados */
-    box-shadow: 0 0px 8px rgba(0, 0, 0, 0.1); /* Sombra */
-    margin: 0px 0; /* Margen */
-    display: flex; /* Flexbox para alineación */
+    position: fixed; /* Fija el header en la parte superior */
+    width: 100%; /* Ocupa todo el ancho */
+    z-index: 1000; /* Asegura que esté por encima de los demás elementos */
     color: white; /* Color del texto */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Sombra ligera */
 }
 
-/* Estilo para botones con animación de borde */
+/* Estilo para el div de controles */
+#controls {
+    background-color: #800020; /* Mismo color que el header */
+    color: white; /* Asegura que el texto sea visible */
+    padding: 2px; /* Espaciado interno */
+    padding-top: 5px;
+    position: fixed; /* Posición fija para que quede en la parte superior */
+    top: 60px; /* Justo debajo del header */
+    width: 100%; /* Ocupa todo el ancho */
+    z-index: 900; /* Debajo del header pero encima del mapa */
+    display: flex; /* Usar flexbox para el layout */
+    justify-content: flex-start; /* Alinea los elementos al inicio */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5); /* Sombra ligera */
+    border-bottom: 2px solid #4B0015; /* Borde guinda más oscuro */
+}
+
+
 .btn-border-animate {
-    background-color: white; /* Fondo blanco */
-    border: 2px solid #015DE1; /* Borde azul */
-    color: #0074d9; /* Texto azul */
-    padding: 2px 10px; /* Relleno */
+    background-color: #800020; /* Fondo guinda */
+    border: 2px solid #800020; /* Borde del mismo color */
+    color: white; /* Texto blanco */
+    padding: 2px 5px; /* Espaciado interno */
     text-align: center; /* Texto centrado */
     text-decoration: none; /* Sin subrayado */
     display: inline-block; /* Se muestra como un bloque en línea */
     font-size: 16px; /* Tamaño de fuente */
-    margin: 0px 0px; /* Sin margen */
+    margin: 1px 2px; /* Espaciado externo */
     border-radius: 6px; /* Bordes redondeados */
     transition: all 0.3s ease; /* Transición suave para todos los cambios */
     cursor: pointer; /* Cursor de puntero al pasar sobre el botón */
 }
 
-/* Cambio de color al pasar el cursor sobre el botón */
 .btn-border-animate:hover {
-    background-color: #0074d9; /* Fondo azul */
-    color: white; /* Texto blanco */
+    background-color: #800020; /* Mismo color que el header */
+    color: #FFD700; /* Texto amarillo */
 }
+
+.btn-border-animate:active {
+    background-color: #800020; /* Mismo color que el header */
+    color: #FFD700; /* Texto amarillo */
+    border: none; /* Sin borde cuando el botón está activo */
+    outline: none; /* Sin contorno */
+    box-shadow: none; /* Sin sombra al presionar */
+}
+
 
 /* Estilo para el logo en el header */
 #logo {
     height: 50px; /* Altura del logo */
+    padding-left: 8px;
     margin-right: 20px; /* Margen derecho */
     display: flex; /* Usa flexbox */
     align-items: center; /* Alinea elementos verticalmente en el centro */
@@ -67,10 +81,13 @@ header h1 {
     flex-grow: 1; /* El elemento crece para ocupar el espacio disponible */
 }
 
-/* Estilo para el mapa, ocupa todo el ancho y altura menos 100px */
+/* Estilo para el mapa */
 #map {
-    height: calc(100% - 100px); /* Altura calculada para ocupar el espacio menos 100px */
+    position: absolute; /* Fija el mapa debajo del header y controles */
+    top: 100px; /* Ajusta la posición para dejar espacio al header y controles */
+    bottom: 0; /* Ajusta la altura hasta el fondo */
     width: 100%; /* Ancho completo */
+    z-index: 800; /* Asegura que el mapa esté debajo del header y controles */
 }
 
 /* Estilo para tooltip sin borde */
@@ -78,7 +95,7 @@ header h1 {
     background: none; /* Sin fondo */
     border: none; /* Sin borde */
     box-shadow: none; /* Sin sombra */
-    color: #FFFF00; /* Texto amarillo */
+    color: #F9F502; /* Texto amarillo */
     font-size: 16px; /* Tamaño de fuente */
 }
 
@@ -126,6 +143,7 @@ header h1 {
         margin-bottom: 10px; /* Margen inferior */
     }
 }
+
 
 /* Estilo para contenedor de checkbox */
 .checkbox-container {
