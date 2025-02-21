@@ -1,4 +1,5 @@
-.leaflet-sidebar{position:absolute;top:0;bottom:0;width:100%;overflow:hidden;z-index:2000}
+.leaflet-sidebar
+{position:absolute;top:0;bottom:0;width:100%;overflow:hidden;z-index:2000}
 .leaflet-sidebar.collapsed{width:40px}
 
 @media (min-width:768px){
@@ -33,13 +34,13 @@
 .leaflet-sidebar-tabs,.leaflet-sidebar-tabs>ul{position:absolute;width:40px;margin:0;padding:0;list-style-type:none}
 .leaflet-sidebar-tabs>li,.leaflet-sidebar-tabs>ul>li{width:100%;height:40px;color:#333;font-size:12pt;overflow:hidden;transition:all 80ms}
 .leaflet-sidebar-tabs>li:hover,.leaflet-sidebar-tabs>ul>li:hover{color:#000;background-color:#eee}
-.leaflet-sidebar-tabs>li.active,.leaflet-sidebar-tabs>ul>li.active{color:#fff;background-color:#0074d9}
+.leaflet-sidebar-tabs>li.active,.leaflet-sidebar-tabs>ul>li.active{color:#fff;background-color:#800020}
 .leaflet-sidebar-tabs>li.disabled,.leaflet-sidebar-tabs>ul>li.disabled{color:rgba(51,51,51,.4)}
 .leaflet-sidebar-tabs>li.disabled:hover,.leaflet-sidebar-tabs>ul>li.disabled:hover{background:0 0}
 .leaflet-sidebar-tabs>li.disabled>a,.leaflet-sidebar-tabs>ul>li.disabled>a{cursor:default}
 .leaflet-sidebar-tabs>li>a,.leaflet-sidebar-tabs>ul>li>a{display:block;width:100%;height:100%;line-height:40px;color:inherit;text-decoration:none;text-align:center;cursor:pointer}
 .leaflet-sidebar-tabs>ul+ul{bottom:0}
-.leaflet-sidebar-content{position:absolute;top:0;bottom:0;background-color:rgba(255,255,255,.95);overflow-x:hidden;overflow-y:auto}
+.leaflet-sidebar-content{position:absolute;top:0;bottom:0;background-color:rgba(255,255,255,.90);overflow-x:hidden;overflow-y:auto}
 .leaflet-sidebar-left .leaflet-sidebar-content{left:40px;right:0}
 .leaflet-sidebar-right .leaflet-sidebar-content{left:0;right:40px}
 .leaflet-sidebar.collapsed>.leaflet-sidebar-content{overflow-y:hidden}
@@ -59,7 +60,7 @@
   .leaflet-sidebar-pane{min-width:265px}
 }
 
-.leaflet-sidebar-header{margin:-10px -20px 0;height:40px;padding:0 20px;line-height:40px;font-size:14.4pt;color:#fff;background-color:#0074d9}
+.leaflet-sidebar-header{margin:-10px -20px 0;height:40px;padding:0 90px;line-height:40px;font-size:14.4pt;font-weight:bold;color:#fff;background-color:#800020}
 .leaflet-sidebar-right .leaflet-sidebar-header{padding-left:40px}
 .leaflet-sidebar-close{position:absolute;top:0;width:40px;height:40px;text-align:center;cursor:pointer}
 .leaflet-sidebar-left .leaflet-sidebar-close{right:0}
