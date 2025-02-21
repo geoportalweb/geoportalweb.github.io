@@ -14,6 +14,33 @@ var googleSat = L.tileLayer("http://www.google.cn/maps/vt?lyrs=s@189&gl=cn&x={x}
 
 window.map = map; 
 
+// Inicializar BetterFileLayer solo si el botón está presente
+const inputButton = document.getElementById("input-btn");
+
+if (inputButton) {
+    try {
+        const betterFileLayer = new L.Control.BetterFileLayer({
+            button: inputButton,
+            layerOptions: {
+                style: {
+                    color: "blue",
+                    weight: 2
+                }
+            },
+            fileSizeLimit: 2048 // Límite de tamaño en KB (2 MB)
+        }).addTo(map);
+
+        betterFileLayer.on("error", function (error) {
+            console.error("Error al cargar archivo:", error);
+        });
+
+    } catch (error) {
+        console.error("Error al inicializar betterFileLayer:", error);
+    }
+} else {
+    console.error("Elemento #input-btn no encontrado");
+}
+
 // Configurar el control de medida
 L.Measure = {
     linearMeasurement: "Medir Distancia",
@@ -57,16 +84,6 @@ var zonas_afec_in     = L.geoJSON(zonas_afectadas_por_incendios, {
 cluster_pam.addLayer(zonas_afec_in);
 //map.addLayer(cluster_pam);
 
-// Crear una capa GeoJSON para el municipio de Ocampo y añadirla al mapa
-var municipio_ocampo = L.geoJSON(municipio_ocampo_epsg).addTo(map);
-
-// Añadir un tooltip permanente al municipio de Ocampo
-municipio_ocampo.bindTooltip("Ocampo", {
-    permanent: true, // Tooltip permanente
-    direction: 'center', // Dirección del tooltip
-    className: 'noBorderTooltip' // Clase CSS personalizada para el tooltip
-}).openTooltip();
-
 // Crear una capa GeoJSON para localidades con iconos personalizados y popups
 var localidades = L.geoJSON(localidades, {
     pointToLayer: function (feature, latlng) {
@@ -93,6 +110,15 @@ var nucleos_pob_tot = L.geoJSON(nucleos_agrarios_con_pob_total, {
     onEachFeature: agregarTooltipNucleos // Función para añadir tooltips a cada municipio
 }).addTo(map);
 
+// Crear una capa GeoJSON para el municipio de Ocampo y añadirla al mapa
+var municipio_ocampo = L.geoJSON(municipio_ocampo_epsg).addTo(map);
+
+// Añadir un tooltip permanente al municipio de Ocampo
+municipio_ocampo.bindTooltip("Ocampo", {
+    permanent: true, // Tooltip permanente
+    direction: 'center', // Dirección del tooltip
+    className: 'noBorderTooltip' // Clase CSS personalizada para el tooltip
+}).openTooltip();
 
 //console.log(zonas_afectadas_por_incendios);
 //----------------INICIO MAPA DE CALOR---------------------------------------------------------------
@@ -437,6 +463,8 @@ var sidebar = L.control.sidebar({
     autopan: false, // Deshabilitar el auto paneo del mapa al abrir el sidebar
     container: "sidebar", // Contenedor del sidebar
 }).addTo(map);
+
+sidebar.open("home");
 
 // Agregar el control de coordenadas
 L.control.coordinates({
