@@ -8,10 +8,10 @@ var map = L.map("map", {
 }).setView([19.57110, -100.333650], 12);
 
 // Añadir capas base
-var googleStreets = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
-var OpenTopoMap = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png');
-var googleSat = L.tileLayer("http://www.google.cn/maps/vt?lyrs=s@189&gl=cn&x={x}&y={y}&z={z}").addTo(map);
 
+var OpenTopoMap = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png');
+var googleSat = L.tileLayer("http://www.google.cn/maps/vt?lyrs=s@189&gl=cn&x={x}&y={y}&z={z}");
+var googleStreets = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 window.map = map; 
 
 // Inicializar BetterFileLayer solo si el botón está presente
@@ -104,6 +104,30 @@ var municipios_pob_tot = L.geoJSON(municipios_poblacion_total, {
     style: cargarStylePob2015, // Estilo personalizado para la capa
     onEachFeature: agregarTooltipMunicipios // Función para añadir tooltips a cada municipio
 }).addTo(map);
+map.fitBounds(municipios_pob_tot.getBounds());
+
+var estados_pob_tot = L.geoJSON(estados_poblacion_total, {
+    style: cargarStyleEnt, // Estilo personalizado para la capa
+    onEachFeature: agregarTooltipEstados // Función para añadir tooltips a cada municipio
+}).addTo(map);
+map.fitBounds(estados_pob_tot.getBounds());
+
+/*
+var municipios_pob_tot = L.geoJson(municipios_poblacion_total, {
+  style: function(feature) {
+    return {
+      fillColor: feature.properties.COLOR,
+      color: "black",
+      weight: 1,
+      fillOpacity: 0.5
+    };
+  },
+  onEachFeature: function(feature, layer) {
+    layer.bindPopup("Municipio: " + feature.properties.NOMGEO);
+  }
+}).addTo(map);
+*/
+
 // Crear una capa GeoJSON para nucleos agrarios con estilos personalizados y popups
 var nucleos_pob_tot = L.geoJSON(nucleos_agrarios_con_pob_total, {
     style: cargarStyleNuc, // Estilo personalizado para la capa
@@ -164,12 +188,24 @@ function actualizarLeyenda() {
         visibleLegends.push({
             label: "Municipios Michoacán", // Etiqueta de la leyenda
             type: "rectangle", // Tipo de símbolo de la leyenda
-            color: "#FFFF00", // Color del símbolo
+            color: "#000000", // Color del símbolo
             weight: 2, // Grosor del borde
             dashArray: 0, // Patrón de línea
             layers: municipios_pob_tot // Capa asociada a la leyenda
         });
     }
+
+     if (map.hasLayer(estados_pob_tot)) {
+        visibleLegends.push({
+            label: "Estados (32)", // Etiqueta de la leyenda
+            type: "rectangle", // Tipo de símbolo de la leyenda
+            color: "#000000", // Color del símbolo
+            weight: 1, // Grosor del borde
+            dashArray: 0, // Patrón de línea
+            layers: estados_pob_tot // Capa asociada a la leyenda
+        });
+    }
+
 
     // Añadir la leyenda de nucleos si la capa está visible
     if (map.hasLayer(nucleos_pob_tot)) {
@@ -259,6 +295,7 @@ document.getElementById("toggleMunicipios").addEventListener("change", function 
     if (this.checked) {
         if (!map.hasLayer(municipios_pob_tot)) {
             map.addLayer(municipios_pob_tot);
+             map.fitBounds(municipios_pob_tot.getBounds()); // <-- Esta línea centra el mapa
         }
     } else {
         if (map.hasLayer(municipios_pob_tot)) {
@@ -268,11 +305,27 @@ document.getElementById("toggleMunicipios").addEventListener("change", function 
     actualizarLeyenda();
 });
 
+document.getElementById("toggleEstados").addEventListener("change", function () {
+    if (this.checked) {
+        if (!map.hasLayer(estados_pob_tot)) {
+            map.addLayer(estados_pob_tot);
+            map.fitBounds(estados_pob_tot.getBounds()); // <-- Esta línea centra el mapa
+        }
+    } else {
+        if (map.hasLayer(estados_pob_tot)) {
+            map.removeLayer(estados_pob_tot);
+        }
+    }
+    actualizarLeyenda();
+});
+
+
 // Evento para mostrar/ocultar los municipios colindantes
 document.getElementById("toggleNucleos").addEventListener("change", function () {
     if (this.checked) {
         if (!map.hasLayer(nucleos_pob_tot)) {
             map.addLayer(nucleos_pob_tot);
+             map.fitBounds(nucleos_pob_tot.getBounds()); // <-- Esta línea centra el mapa
         }
     } else {
         if (map.hasLayer(nucleos_pob_tot)) {
@@ -340,14 +393,29 @@ window.onload = function () {
     }
 
     if (document.getElementById("toggleMunicipios").checked) {
+        //map.fitBounds(municipios_pob_tot.getBounds());
         if (!map.hasLayer(municipios_pob_tot)) {
             map.addLayer(municipios_pob_tot);
+
         }
     } else {
         if (map.hasLayer(municipios_pob_tot)) {
             map.removeLayer(municipios_pob_tot);
         }
     }
+
+    if (document.getElementById("toggleEstados").checked) {
+        if (!map.hasLayer(estados_pob_tot)) {
+            map.addLayer(estados_pob_tot);
+            //map.fitBounds(estados_pob_tot.getBounds());
+        }
+    } else {
+        if (map.hasLayer(estados_pob_tot)) {
+            map.removeLayer(estados_pob_tot);
+        }
+    }
+
+
 
      if (document.getElementById("toggleNucleos").checked) {
         if (!map.hasLayer(nucleos_pob_tot)) {
@@ -393,15 +461,24 @@ if (document.getElementById("toggleCorrientesDeAgua").checked) {
 
 }
 
+// Definir los límites del ortomosaico (ajusta las coordenadas correctamente)
+var bounds = [[19.487501988,-100.372953992], [19.484930022,-100.370285126]]; // Esquinas superior izquierda e inferior derecha
+
+// Cargar el ortomosaico
+var ortomosaico = L.imageOverlay('images/ortofoto_uiim-0-0.png', bounds);
+
 // Diccionario de Mapas Base
 var baseMaps = {
     "Google Maps Calles": googleStreets, // Capa de Google Maps Calles
     "Google Maps Satélite": googleSat, // Capa de Google Maps Satélite
     "Google Topo Map": OpenTopoMap, // Capa de OpenTopoMap 
+    "Imagen Dron": ortomosaico // Agregar ortomosaico como opción
 };
 
 // Diccionario de Capas
 var layers = {};
+
+
 
 // Agregar un control de localización (GPS)
 L.control.locate({
@@ -441,8 +518,9 @@ var searchControl = new L.Control.Search({
 
 searchControl.on('search:locationfound', function (e) {
     e.layer.setStyle({
-        fillColor: '#3f0', // Color de relleno al encontrar la ubicación
-        color: '#0f0', // Color del borde al encontrar la ubicación
+        fillColor: 'transparent',  // o usa fillOpacity: 0
+        fillOpacity: 0,             // Sin relleno visible// Color de relleno al encontrar la ubicación
+        color: 'red', // Color del borde al encontrar la ubicación
         weight: 5 // Grosor del borde al encontrar la ubicación
     });
     if (e.layer._popup) {
@@ -486,6 +564,13 @@ L.control.scale({
 // Añadir Control de Capas
 L.control.layers(baseMaps, layers).addTo(map);
 
+// Cuando se selecciona la capa "Imagen Dron", centrar el mapa sobre el ortomosaico
+map.on('baselayerchange', function (event) {
+    if (event.name === "Imagen Dron") {
+        map.fitBounds(bounds);
+    }
+});
+
 // Añadir Leyenda
 var leyenda = L.control.Legend({
     position: "bottomright", // Posición de la leyenda en el mapa
@@ -495,9 +580,11 @@ var leyenda = L.control.Legend({
 }).addTo(map);
 
 // Obtener el div del Home por su ID
-var homeDiv = document.getElementById('homeButton');
+//var homeDiv = document.getElementById('homeButton');
 
 // Añadir un evento click al div del Home para centrar el mapa
+/*
 homeDiv.addEventListener('click', function() {
-    map.setView([19.57110, -100.333650], 12); // Coordenadas del municipio de Ocampo y nivel de zoom
+    map.fitBounds(municipios_pob_tot.getBounds());
 });
+*/

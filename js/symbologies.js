@@ -80,14 +80,40 @@ function obtenerColorNuc(Name) {
 // Función para cargar el estilo basado en la población de 2015
 function cargarStylePob2015(feature) {
     return {
-        fillColor: obtenerColorPob2015(feature.properties.NOMGEO), // Color de relleno basado en la población
+        //fillColor: obtenerColorPob2015(feature.properties.NOMGEO), // Color de relleno basado en la población
+       fillColor: feature.properties.COLOR,
         fillOpacity: 0.2,   // Opacidad del relleno
         weight: 1,          // Grosor del borde
-        color: "#FFFF00",    // Color del borde
+        color: "black",    // Color del borde
         opacity: 1,       // Opacidad del borde
         dashArray: ""       // Sin patrón de guiones
     };
 }
+function cargarStyleEnt(feature) {
+    return {
+        //fillColor: obtenerColorPob2015(feature.properties.NOMGEO), // Color de relleno basado en la población
+       fillColor: feature.properties.COLOR,
+        fillOpacity: 0.2,   // Opacidad del relleno
+        weight: 1,          // Grosor del borde
+        color: "black",    // Color del borde
+        opacity: 1,       // Opacidad del borde
+        dashArray: ""       // Sin patrón de guiones
+    };
+}
+/*
+var municipios_pob_tot = L.geoJson(municipios_poblacion_total, {
+  style: function(feature) {
+    return {
+      fillColor: feature.properties.COLOR,
+      color: "black",
+      weight: 1,
+      fillOpacity: 0.5
+    };
+  },
+  onEachFeature: function(feature, layer) {
+    layer.bindPopup("Municipio: " + feature.properties.NOMGEO);
+  }
+}).addTo(map);*/
 
 // Función para cargar el estilo basado en los núcleos agrarios
 function cargarStyleNuc(feature) {
