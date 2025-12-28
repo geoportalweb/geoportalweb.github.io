@@ -60,12 +60,19 @@
   .leaflet-sidebar-pane{min-width:265px}
 }
 
-.leaflet-sidebar-header{margin:-10px -20px 0;height:40px;padding:0 90px;line-height:40px;font-size:14.4pt;font-weight:bold;color:#fff;background-color:#800020}
-.leaflet-sidebar-right .leaflet-sidebar-header{padding-left:40px}
-.leaflet-sidebar-close{position:absolute;top:0;width:40px;height:40px;text-align:center;cursor:pointer}
-.leaflet-sidebar-left .leaflet-sidebar-close{right:0}
-.leaflet-sidebar-right .leaflet-sidebar-close{left:0}
-.leaflet-sidebar{box-shadow:0 1px 5px rgba(0,0,0,.65)}
+.leaflet-sidebar-header {
+  margin: -10px -20px 0;
+  height: 40px;
+  padding: 0 20px;
+  line-height: 40px;
+  font-size: 14.4pt;
+  font-weight: bold;
+  color: #fff;
+  background-color: #800020;
+
+  text-align: center;           /* 🔴 Centra el texto horizontalmente */
+  position: relative;           /* Necesario para posicionar el botón de cierre */
+}
 
 @media (min-width:768px){
   .leaflet-sidebar{border-radius:4px}.leaflet-sidebar.leaflet-touch{border:2px solid rgba(0,0,0,.2)}
