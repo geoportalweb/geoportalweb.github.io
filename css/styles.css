@@ -92,15 +92,30 @@ header h1 {
 
 /* Estilo para tooltip sin borde */
 .noBorderTooltip {
-    background: none; /* Sin fondo */
-    border: none; /* Sin borde */
-    box-shadow: none; /* Sin sombra */
-    color: #F9F502; /* Texto amarillo */
-    font-size: 16px; /* Tamaño de fuente */
+   color: #000000; /* texto negro */
+  font-weight: bold;
+  text-shadow:
+    -1px -1px 0 #ffffff,
+     1px -1px 0 #ffffff,
+    -1px  1px 0 #ffffff,
+     1px  1px 0 #ffffff; /* halo blanco */
+  background: none;
+  border: none;
+  font-size: 13px;
+  padding: 0;
 }
 
 /* Estilo para tooltip sin borde */
 .noBorderTooltipNucleos 
+{
+    background: none; /* Sin fondo */
+    border: none; /* Sin borde */
+    box-shadow: none; /* Sin sombra */
+    color: #eafaf1; /* Texto BLANCO */
+    font-size: 10px; /* Tamaño de fuente */    
+}
+
+.noBorderTooltipEstados 
 {
     background: none; /* Sin fondo */
     border: none; /* Sin borde */
