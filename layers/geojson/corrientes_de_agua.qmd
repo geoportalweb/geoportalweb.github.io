@@ -1,0 +1,36 @@
+<!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
+<qgis version="3.36.3-Maidenhead">
+  <identifier>CORIENTES DE AGUA DE OCAMPO</identifier>
+  <parentidentifier></parentidentifier>
+  <language>SPA</language>
+  <type>dataset</type>
+  <title>CORIENTES DE AGUA DE OCAMPO</title>
+  <abstract>La Red Hidrográfica escala 1:50 000 en su edición 2, ofrece un sistema de circulación lineal estructurado y mejorado, que representa el comportamiento de drenaje superficial de una cuenca hidrográfica, en el cual se garantiza la continuidad de flujos a través de subcuencas, además de incluir indicadores de hidromorfometría como la magnitud de orden según clasificación de Strahler y el nivel de corriente entre otros, que aunado a la utilización de métodos y herramientas de redes geométricas en aplicaciones de sistemas de información geográfica, es de gran utilidad para diversos estudios. Sus componentes vectoriales son: líneas de flujo, puntos de drenaje y el polígono de la subcuenca también digitalizado a la misma escala de la red, el cual se caracteriza por tener consistencia espacial con la Red Hidrográfica de acuerdo a los límites físico-naturales sobre la divisoria de cada unidad. Para su digitalización, se consideró como referencia la conformación de áreas en función del componente "División de Aguas Superficiales" de la "Carta Hidrológica escala 1:250 000 serie I",no obstante presenta cambios significativos debido al detalle de la información y de la interpretación de los escurrimientos superficiales.
+
+Proveer a los especialistas y público en general, de información de redes hidrográficas a mayor detalle en apoyo a los tomadores de decisiones para diversos proyectos relacionados con la administración del recurso hídrico, calidad del agua, prevención de desastres naturales entre otros orientados al desarrollo sustentable del país.
+
+Las redes fueron elaboradas a partir de los rasgos hidrográficos contenidos en los conjuntos de datos topográficos escala 1:50 000, en específico corrientes y cuerpos de agua intermitentes y perennes, para lo cual fue necesario realizar la interpretación, análisis y edición de la conectividad de las líneas de flujo, así como desarrollar algoritmos para determinar la dirección de flujo para cada segmento e indicadores de hidromorfometría, entre otros para validación geométrica y topológica. Los conjuntos digitales que pertenecen a esta subcuenca y su correspondiente fecha de actualización o creación son: e14a25(1995-10-31), e14a36(1995-11-30), e14a26(1995-11-30), e14a34(1996-01-31), e14a44(1996-01-31), e14a46(1996-01-31), e14a35(1996-02-28), e14a55(1998-06-30), e14a54(1999-12-31), e14a45(). Las fechas anteriormente mencionadas son las mismas detalladas(en el mismo orden) en la sección "Time_Period_Information" de este metadato.</abstract>
+  <keywords vocabulary="gmd:topicCategory">
+    <keyword>Afluente</keyword>
+  </keywords>
+  <links/>
+  <dates/>
+  <fees></fees>
+  <constraints type="Acceso">Acceso al público a través de los centros de venta del Instituto Nacional de Estadística y Geografía - INEGI. </constraints>
+  <rights>Como insumo para otras aplicaciones o publicaciones sin la autorización respectiva u omisión de los créditos del autor.</rights>
+  <encoding></encoding>
+  <crs>
+    <spatialrefsys nativeFormat="Wkt">
+      <wkt>GEOGCRS["Unknown datum based upon the GRS 1980 ellipsoid",DATUM["Not specified (based on GRS 1980 ellipsoid)",ELLIPSOID["GRS 1980",6378137,298.257222101,LENGTHUNIT["metre",1]]],PRIMEM["Greenwich",0,ANGLEUNIT["degree",0.0174532925199433]],CS[ellipsoidal,2],AXIS["geodetic latitude (Lat)",north,ORDER[1],ANGLEUNIT["degree",0.0174532925199433]],AXIS["geodetic longitude (Lon)",east,ORDER[2],ANGLEUNIT["degree",0.0174532925199433]],USAGE[SCOPE["Not recommended."],AREA["Not specified."],BBOX[-90,-180,90,180]],ID["EPSG",4019]]</wkt>
+      <proj4>+proj=longlat +ellps=GRS80 +no_defs</proj4>
+      <srsid>3230</srsid>
+      <srid>4019</srid>
+      <authid>EPSG:4019</authid>
+      <description>Unknown datum based upon the GRS 1980 ellipsoid</description>
+      <projectionacronym>longlat</projectionacronym>
+      <ellipsoidacronym>EPSG:7019</ellipsoidacronym>
+      <geographicflag>true</geographicflag>
+    </spatialrefsys>
+  </crs>
+  <extent/>
+</qgis>
