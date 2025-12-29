@@ -1,0 +1,170 @@
+/* Estilo global para el cuerpo y html */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+/* Estilo para el header */
+header {
+    background-color: rgba(128, 0, 32, 0.8); /* Fondo semi-transparente */
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    border-bottom: 1px dotted #FFFFFF; /* Borde más delgado */
+    position: fixed; /* Fija el header en la parte superior */
+    width: 100%;
+    top: 0;
+    z-index: 1002; /* Prioridad máxima para el header */
+    box-sizing: border-box;
+}
+
+/* Estilo para el div de controles debajo del header */
+#controls {
+    background-color: rgba(128, 0, 32, 0.8); /* Fondo semi-transparente */
+    position: fixed; /* Fija los controles justo debajo del header */
+    top: 65px; /* Ajusta este valor según la altura del header */
+    width: 100%;
+    padding-top: 5px;
+    border-bottom: 2px solid #FFFFFF; /* Borde delgado */
+    z-index: 900; /* Debajo del header pero por encima del mapa */
+    box-sizing: border-box;
+    display: flex;
+    justify-content: flex-start; /* Alinea los elementos a la izquierda */
+}
+
+/* Ajuste general para los controles de Leaflet */
+.leaflet-control {
+    position: absolute;
+    top: 110px; /* Ajusta según la altura combinada del header y controles */
+    right: 10px; /* Alinea los controles a la derecha */
+    z-index: 1001; /* Asegura que estén visibles sobre otros elementos */
+}
+
+/* Ajuste del control de pantalla completa */
+.leaflet-control-fullscreen {
+    position: absolute;
+    top: 110px; /* Ajusta según la altura combinada del header y controles */
+    right: 10px; /* Alinea a la derecha */
+    z-index: 1001; /* Igual al resto de los controles */
+}
+
+/* Estilo para el mapa */
+#map {
+    position: relative; /* Fija el mapa debajo del header y controles */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 110px); /* Altura dinámica */
+    z-index: 1; /* Asegura que el mapa esté debajo del header y controls */
+}
+
+/* Ajuste de otros elementos */
+.leaflet-sidebar {
+    position: absolute;
+    top: 120px; /* Ajusta la posición debajo del header y controles */
+    z-index: 800;
+}
+
+/* Estilo para el contenedor de controles */
+.controls-style {
+    background-color: #a70763;
+    border: 0px solid #a70763;
+    padding: 2px;
+    border-radius: 0px;
+    box-shadow: 0 0px 8px rgba(0, 0, 0, 0.1);
+    margin: 0px 0;
+    display: flex;
+    color: white;
+}
+
+/* Estilo para botones con animación de borde */
+.btn-border-animate {
+    background-color: #800020;
+    border: 2px solid #800020;
+    color: #FFFFFF;
+    padding: 2px 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 1px 2px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+/* Cambio de color al pasar el cursor sobre el botón */
+.btn-border-animate:hover {
+    background-color: #FFFFFF;
+    color: #800020;
+}
+
+/* Estilo para el logo en el header */
+#logo {
+    height: 50px;
+    margin-right: 20px;
+    display: flex;
+    align-items: center;
+}
+
+/* Estilo para el título del header */
+header h1 {
+    color: white;
+    text-align: center;
+    flex-grow: 1;
+}
+
+/* Tooltip sin borde */
+.noBorderTooltip {
+    background: none;
+    border: none;
+    box-shadow: none;
+    color: #FFFF00;
+    font-size: 16px;
+}
+
+/* Tooltip sin borde (nucleos) */
+.noBorderTooltipNucleos {
+    background: none;
+    border: none;
+    box-shadow: none;
+    color: #eafaf1;
+    font-size: 10px;
+}
+
+/* Imagen en popup */
+.popup-img-dpto {
+    width: 100%;
+    height: auto;
+}
+
+/* Quitar leyendas de Leaflet */
+.leaflet-control-attribution {
+    display: none;
+}
+
+/* Tooltip */
+.tooltip-dpto {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Título de la leyenda en Leaflet */
+.leaflet-legend-title {
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* Media query para dispositivos móviles */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    #logo {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+}
